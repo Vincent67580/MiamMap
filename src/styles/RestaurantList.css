@@ -1,0 +1,77 @@
+.restaurant-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.restaurant-card {
+  background-color: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+/* 🎯 Utilisation de ton orange accentuation et fond accentué */
+.restaurant-card.active {
+  border-color: var(--accent);
+  background-color: var(--accent-bg);
+  box-shadow: 0 4px 12px var(--accent-border);
+  transform: translateY(-2px);
+}
+
+.restaurant-card h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  color: var(--text-h);
+}
+
+.restaurant-cuisine {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.restaurant-address {
+  font-size: 0.85rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.restaurant-hours,
+.restaurant-phone,
+.restaurant-web {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.restaurant-phone a,
+.restaurant-web a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.restaurant-phone a:hover,
+.restaurant-web a:hover {
+  text-decoration: underline;
+}
+
+.no-results {
+  padding: 30px;
+  color: var(--text);
+  text-align: center;
+  font-style: italic;
+}

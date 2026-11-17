@@ -1,0 +1,92 @@
+/* Fichier : src/App.css */
+
+.miam-app-container {
+  display: flex;
+  flex-direction: column;
+  height: 99vh; /* Prend exactement la hauteur de l'écran */
+  overflow: hidden; /* Empêche toute la page de scroller */
+}
+
+.main-header {
+  flex-shrink: 0; /* Le header garde sa taille fixe en haut */
+  padding-bottom: 25px;
+}
+
+.content-layout {
+  display: flex;
+  flex-direction: row; /* S'assure que la liste et la carte sont côte à côte */
+  flex: 1; /* Prend tout l'espace restant sous le header */
+  min-height: 0; /* Indispensable en Flexbox pour autoriser le scroll interne */
+  overflow: hidden;
+}
+
+/* Colonne de gauche : la liste (titre + filtres + cartes) */
+.sidebar-list {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* Seule la sidebar complète scrolle verticalement */
+  min-height: 0;
+}
+
+/* Colonne de droite : la carte */
+.map-section {
+  flex: 2;
+  min-height: 0;
+  position: relative;
+}
+
+
+/* Style des filtres de cuisine au-dessus des cartes */
+.cuisine-filters-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cuisine-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text);
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.cuisine-btn:hover {
+  border-color: var(--accent);
+}
+
+/* 🎯 Bouton actif en orange (#ff5722) */
+.cuisine-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+/* Style du sélecteur de rayon dans le Header */
+.radius-selector-header {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.radius-selector-header select {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+  font-size: 14px;
+}
