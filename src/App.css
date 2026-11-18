@@ -90,3 +90,59 @@
   cursor: pointer;
   font-size: 14px;
 }
+
+
+
+
+
+@media (max-width: 768px) {
+  .miam-app-container {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .main-header {
+    padding: 15px 12px;
+  }
+
+  /* Structure empilée sur mobile */
+  .content-layout {
+    flex-direction: column-reverse; /* Carte en haut, liste en bas */
+    overflow: visible;
+  }
+
+  /* La carte reste fixe en haut de l'écran sous le header */
+  .map-section {
+    flex: none;
+    height: 380px;
+    width: 100%;
+    position: relative;
+    z-index: 1; /* Sépare proprement les couches */
+  }
+
+  /* La liste des restaurants arrive juste après, sans passer derrière */
+  .sidebar-list {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    overflow-y: visible;
+    box-sizing: border-box;
+    background-color: var(--bg); /* Empêche la transparence */
+    position: relative;
+    z-index: 2; /* S'assure que les filtres et les boutons sont bien cliquables au premier plan */
+  }
+
+  /* Filtres de cuisine en défilement horizontal tactile */
+  .cuisine-filters-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cuisine-btn {
+    flex-shrink: 0;
+  }
+}
