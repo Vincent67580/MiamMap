@@ -1,11 +1,10 @@
 /* MapView.css */
 .map-wrapper {
   width: 100%;
-  height: 450px; /* Hauteur sur mobile */
+  height: 100%; /* Prend toute la hauteur de .map-section (350px sur mobile, 100% sur PC) */
   position: relative;
-  border-top: 1px solid var(--border);
   box-sizing: border-box;
-  z-index: 1; /* Évite que la carte ne passe par-dessus vos menus ou modales */
+  z-index: 1;
 }
 
 /* Sur grand écran, la carte prend toute la hauteur disponible à côté de la liste */

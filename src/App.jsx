@@ -18,6 +18,9 @@ export default function App() {
   const [selectedCuisine, setSelectedCuisine] = useState('all');
   const [lastQueryCoords, setLastQueryCoords] = useState(null);
 
+  // 🎯 Nouvel état pour afficher ou masquer la carte
+  const [showMap, setShowMap] = useState(true);
+
   const handleSearch = async (query) => {
     setLoading(true);
     setErrorMsg(null);
@@ -84,7 +87,7 @@ export default function App() {
 
   const handleRadiusChange = async (newRadius) => {
     setRadius(newRadius);
-    setSelectedRestaurant(null); // Réinitialise la sélection au changement de rayon
+    setSelectedRestaurant(null);
     if (lastQueryCoords) {
       setLoading(true);
       setErrorMsg(null);
@@ -99,7 +102,6 @@ export default function App() {
     }
   };
 
-  // 🎯 Changement de filtre de cuisine : enlève la sélection et recentre globalement
   const handleCuisineChange = (cuisine) => {
     setSelectedCuisine(cuisine);
     setSelectedRestaurant(null); 
@@ -108,17 +110,16 @@ export default function App() {
     }
   };
 
-  // 🎯 Gestion du clic sur un restaurant (Toggle : si on re-clique dessus, ça désélectionne et dézoom)
   const handleSelectRestaurant = (resto) => {
     if (selectedRestaurant && selectedRestaurant.id === resto.id) {
-      // Re-clic sur le même : désélection + retour au centre de recherche
       setSelectedRestaurant(null);
       if (lastQueryCoords) {
         setMapCenter([...lastQueryCoords]);
       }
     } else {
-      // Nouveau choix : sélection du restaurant
       setSelectedRestaurant(resto);
+      // Si la carte était masquée et qu'on clique sur un resto, on peut la réafficher automatiquement
+      if (!showMap) setShowMap(true);
     }
   };
 
@@ -135,23 +136,34 @@ export default function App() {
         
         <SearchBar onSearch={handleSearch} onGeolocate={handleGeolocate} />
 
-        <div className="radius-selector-header">
-          <label htmlFor="radius-select">📏 Rayon de recherche :</label>
-          <select 
-            id="radius-select"
-            value={radius} 
-            onChange={(e) => handleRadiusChange(Number(e.target.value))}
+        <div className="header-controls">
+          <div className="radius-selector-header">
+            <label htmlFor="radius-select">📏 Rayon :</label>
+            <select 
+              id="radius-select"
+              value={radius} 
+              onChange={(e) => handleRadiusChange(Number(e.target.value))}
+            >
+              <option value={1000}>1 km</option>
+              <option value={2000}>2 km</option>
+              <option value={5000}>5 km</option>
+              <option value={10000}>10 km</option>
+              <option value={20000}>20 km</option>
+            </select>
+          </div>
+
+          {/* 🎯 Bouton pour afficher / masquer la carte */}
+          <button 
+            type="button"
+            className="toggle-map-btn"
+            onClick={() => setShowMap(prev => !prev)}
           >
-            <option value={1000}>1 km</option>
-            <option value={2000}>2 km</option>
-            <option value={5000}>5 km</option>
-            <option value={10000}>10 km</option>
-            <option value={20000}>20 km</option>
-          </select>
+            {showMap ? '🗺️ Masquer la carte' : '🗺️ Afficher la carte'}
+          </button>
         </div>
       </header>
 
-      <main className="content-layout">
+      <main className={`content-layout ${!showMap ? 'map-hidden' : ''}`}>
         <div className="sidebar-list">
           <h2>Restaurants à proximité</h2>
 
@@ -197,15 +209,18 @@ export default function App() {
           )}
         </div>
 
-        <div className="map-section">
-          <MapView
-            restaurants={filteredRestaurants}
-            selectedRestaurant={selectedRestaurant}
-            center={mapCenter}
-            searchCenter={lastQueryCoords}
-            radius={radius}
-          />
-        </div>
+        {/* 🎯 Affichage conditionnel de la carte */}
+        {showMap && (
+          <div className="map-section">
+            <MapView
+              restaurants={filteredRestaurants}
+              selectedRestaurant={selectedRestaurant}
+              center={mapCenter}
+              searchCenter={lastQueryCoords}
+              radius={radius}
+            />
+          </div>
+        )}
       </main>
     </div>
   );

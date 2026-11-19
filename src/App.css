@@ -69,9 +69,19 @@
   border-color: var(--accent);
 }
 
+/* Conteneur regroupant le sélecteur de rayon et le bouton de la carte */
+.header-controls {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 /* Style du sélecteur de rayon dans le Header */
 .radius-selector-header {
-  margin-top: 10px;
+  margin-top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +101,32 @@
   font-size: 14px;
 }
 
+/* Style du bouton Masquer / Afficher la carte */
+.toggle-map-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
+.toggle-map-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+/* Quand la carte est masquée sur ordinateur, la liste prend toute la largeur proprement */
+.content-layout.map-hidden .sidebar-list {
+  width: 100%;
+  max-width: 100%;
+  border-right: none;
+}
 
 
 
@@ -114,11 +149,16 @@
 
   /* La carte reste fixe en haut de l'écran sous le header */
   .map-section {
-    flex: none;
-    height: 380px;
-    width: 100%;
-    position: relative;
-    z-index: 1; /* Sépare proprement les couches */
+      flex: none;
+      height: 350px;
+      width: 90%;               /* 👈 Largeur réduite à 90 % */
+      margin: 0 auto 15px auto; /* 👈 Centre la carte horizontalement et ajoute un espace en dessous */
+      border-radius: 12px;      /* 👈 Coins arrondis pour un rendu plus esthétique */
+      overflow: hidden;         /* 👈 Nécessaire pour que la carte Leaflet respecte les coins arrondis */
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 1;
   }
 
   /* La liste des restaurants arrive juste après, sans passer derrière */
