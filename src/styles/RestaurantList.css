@@ -75,3 +75,52 @@
   text-align: center;
   font-style: italic;
 }
+
+/* Style des filtres de cuisine au-dessus des cartes */
+.cuisine-filters-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cuisine-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text);
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.cuisine-btn:hover {
+  border-color: var(--accent);
+}
+
+/* 🎯 Bouton actif en orange (#ff5722) */
+.cuisine-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+
+@media (max-width : 768px) {
+    /* Filtres de cuisine en défilement horizontal tactile */
+  .cuisine-filters-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cuisine-btn {
+    flex-shrink: 0;
+  }
+  
+}

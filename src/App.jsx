@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import SearchBar from './components/SearchBar';
+import Header from './components/Header';
+import ControlsBar from './components/ControlsBar';
 import RestaurantList from './components/RestaurantList';
 import MapView from './components/MapView';
 import Spinner from './components/Spinner';
@@ -17,22 +18,20 @@ export default function App() {
   const [radius, setRadius] = useState(2000);
   const [selectedCuisine, setSelectedCuisine] = useState('all');
   const [lastQueryCoords, setLastQueryCoords] = useState(null);
-
-  // 🎯 Nouvel état pour afficher ou masquer la carte
   const [showMap, setShowMap] = useState(true);
 
   const handleSearch = async (query) => {
     setLoading(true);
     setErrorMsg(null);
     setSelectedRestaurant(null);
-    
+
     const location = await searchLocation(query);
-    
+
     if (location) {
       const coords = [location.lat, location.lng];
       setMapCenter(coords);
       setLastQueryCoords(coords);
-      
+
       try {
         const realRestos = await fetchRealRestaurants(location.lat, location.lng, radius);
         setRestaurants(realRestos);
@@ -104,7 +103,7 @@ export default function App() {
 
   const handleCuisineChange = (cuisine) => {
     setSelectedCuisine(cuisine);
-    setSelectedRestaurant(null); 
+    setSelectedRestaurant(null);
     if (lastQueryCoords) {
       setMapCenter([...lastQueryCoords]);
     }
@@ -118,7 +117,6 @@ export default function App() {
       }
     } else {
       setSelectedRestaurant(resto);
-      // Si la carte était masquée et qu'on clique sur un resto, on peut la réafficher automatiquement
       if (!showMap) setShowMap(true);
     }
   };
@@ -131,37 +129,16 @@ export default function App() {
 
   return (
     <div className="miam-app-container">
-      <header className="main-header">
-        <h1>MiamMap 🍔</h1>
-        
-        <SearchBar onSearch={handleSearch} onGeolocate={handleGeolocate} />
+      <Header />
 
-        <div className="header-controls">
-          <div className="radius-selector-header">
-            <label htmlFor="radius-select">📏 Rayon :</label>
-            <select 
-              id="radius-select"
-              value={radius} 
-              onChange={(e) => handleRadiusChange(Number(e.target.value))}
-            >
-              <option value={1000}>1 km</option>
-              <option value={2000}>2 km</option>
-              <option value={5000}>5 km</option>
-              <option value={10000}>10 km</option>
-              <option value={20000}>20 km</option>
-            </select>
-          </div>
-
-          {/* 🎯 Bouton pour afficher / masquer la carte */}
-          <button 
-            type="button"
-            className="toggle-map-btn"
-            onClick={() => setShowMap(prev => !prev)}
-          >
-            {showMap ? '🗺️ Masquer la carte' : '🗺️ Afficher la carte'}
-          </button>
-        </div>
-      </header>
+      <ControlsBar
+        onSearch={handleSearch}
+        onGeolocate={handleGeolocate}
+        radius={radius}
+        onRadiusChange={handleRadiusChange}
+        showMap={showMap}
+        onToggleMap={() => setShowMap((prev) => !prev)}
+      />
 
       <main className={`content-layout ${!showMap ? 'map-hidden' : ''}`}>
         <div className="sidebar-list">
@@ -169,7 +146,7 @@ export default function App() {
 
           {restaurants.length > 0 && (
             <div className="cuisine-filters-container">
-              <button 
+              <button
                 className={selectedCuisine === 'all' ? 'cuisine-btn active' : 'cuisine-btn'}
                 onClick={() => handleCuisineChange('all')}
               >
@@ -186,7 +163,7 @@ export default function App() {
               ))}
             </div>
           )}
-          
+
           {loading ? (
             <Spinner text="Recherche en cours..." />
           ) : errorMsg ? (
@@ -209,7 +186,6 @@ export default function App() {
           )}
         </div>
 
-        {/* 🎯 Affichage conditionnel de la carte */}
         {showMap && (
           <div className="map-section">
             <MapView
