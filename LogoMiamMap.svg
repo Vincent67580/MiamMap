@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="400" height="440" fill="none">
+  <defs>
+    <!-- Dégradé épingle rouge-orangé -->
+    <linearGradient id="pinGrad" x1="120" y1="20" x2="280" y2="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ff6b4a" />
+      <stop offset="100%" stop-color="#e53924" />
+    </linearGradient>
+
+    <!-- Dégradé pain burger -->
+    <linearGradient id="bunTopGrad" x1="160" y1="70" x2="240" y2="115" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffb74d" />
+      <stop offset="100%" stop-color="#f57c00" />
+    </linearGradient>
+    <linearGradient id="bunBotGrad" x1="160" y1="138" x2="240" y2="155" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffa726" />
+      <stop offset="100%" stop-color="#ef6c00" />
+    </linearGradient>
+
+    <!-- Ombre douce sous la carte et l'épingle -->
+    <filter id="mapShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.14" />
+    </filter>
+    <filter id="pinTipShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#1b3b2b" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- 1. CARTE PLIÉE EN 4 VOLETS -->
+  <g filter="url(#mapShadow)">
+    <!-- Volet 1 (Gauche) -->
+    <path d="M48 168 C48 158, 55 152, 65 149 L125 134 L125 322 L65 338 C53 341, 45 333, 46 320 Z" fill="#f4f1ea" />
+    <!-- Parc vert haut gauche -->
+    <path d="M68 163 L115 151 L115 198 L63 212 Z" fill="#7ed957" />
+    <circle cx="88" cy="182" r="8" fill="#63be3f" />
+    <!-- Parc vert bas gauche + rivière -->
+    <path d="M62 225 L115 211 L115 308 L60 323 C56 324, 54 320, 55 315 Z" fill="#7ed957" />
+    <path d="M72 320 C80 285, 98 268, 115 262 L115 308 Z" fill="#38b6ff" />
+
+    <!-- Volet 2 (Centre-gauche) -->
+    <polygon points="125,134 200,152 200,340 125,322" fill="#e8e4da" />
+    <!-- Zone verte -->
+    <polygon points="133,152 195,167 195,258 133,243" fill="#6cc644" />
+    <!-- Rivière bleue -->
+    <polygon points="133,258 200,274 200,326 133,310" fill="#2ea8f0" />
+
+    <!-- Volet 3 (Centre-droit) -->
+    <polygon points="200,152 275,134 275,322 200,340" fill="#f7f5ef" />
+    <!-- Zone verte -->
+    <polygon points="205,167 267,152 267,243 205,258" fill="#5cb338" />
+    <!-- Rivière bleue courbée -->
+    <path d="M200 274 L250 286 C262 289, 268 298, 268 310 L200 326 Z" fill="#38b6ff" />
+    <path d="M212 180 L267 167 L267 272 C245 265, 228 245, 212 215 Z" fill="#38b6ff" />
+
+    <!-- Volet 4 (Droite) -->
+    <path d="M275 134 L335 149 C345 152, 352 158, 352 168 L354 320 C355 333, 347 341, 335 338 L275 322 Z" fill="#e6e1d6" />
+    <!-- Parc vert haut droite -->
+    <path d="M285 151 L332 163 L337 212 L285 198 Z" fill="#6cc644" />
+    <path d="M306 184 C306 177, 316 177, 316 184 C316 189, 319 192, 313 194 C308 195, 306 190, 306 184 Z" fill="#4e9e2d" />
+    <!-- Eau bas droite -->
+    <path d="M285 212 C305 225, 325 232, 338 234 L344 315 C345 320, 342 324, 337 323 L285 309 Z" fill="#2596de" />
+
+    <!-- Lignes de pliure subtiles entre les volets -->
+    <line x1="125" y1="134" x2="125" y2="322" stroke="#000000" stroke-opacity="0.06" stroke-width="2" />
+    <line x1="200" y1="152" x2="200" y2="340" stroke="#000000" stroke-opacity="0.1" stroke-width="2" />
+    <line x1="275" y1="134" x2="275" y2="322" stroke="#000000" stroke-opacity="0.06" stroke-width="2" />
+  </g>
+
+  <!-- 2. TRAITS D'ÉCLAT ORANGÉS AUTOUR DE L'ÉPINGLE -->
+  <g stroke="#ff9f1c" stroke-width="11" stroke-linecap="round">
+    <!-- Gauche -->
+    <line x1="86" y1="62" x2="104" y2="80" />
+    <line x1="72" y1="106" x2="96" y2="106" />
+    <!-- Droite -->
+    <line x1="314" y1="62" x2="296" y2="80" />
+    <line x1="328" y1="106" x2="304" y2="106" />
+  </g>
+
+  <!-- 3. ÉPINGLE DE GÉOLOCALISATION -->
+  <g filter="url(#pinTipShadow)">
+    <path d="M200 20 C148 20, 108 60, 108 112 C108 168, 184 235, 195 245 C198 247.5, 202 247.5, 205 245 C216 235, 292 168, 292 112 C292 60, 252 20, 200 20 Z" fill="url(#pinGrad)" />
+    <!-- Reflet subtil sur le haut de l'épingle -->
+    <path d="M200 24 C153 24, 114 61, 113 108 C116 65, 154 31, 200 31 C246 31, 284 65, 287 108 C286 61, 247 24, 200 24 Z" fill="#ffffff" fill-opacity="0.22" />
+  </g>
+
+  <!-- Médaillon blanc intérieur -->
+  <circle cx="200" cy="110" r="64" fill="#ffffff" />
+
+  <!-- 4. COUVERTS EN ARRIÈRE-PLAN DANS LE MÉDAILLON -->
+  <g fill="#cfd4dc">
+    <!-- Fourchette à gauche -->
+    <rect x="163" y="96" width="8" height="58" rx="4" transform="rotate(-16 163 96)" />
+    <path d="M150 76 L154 96 C155 101, 168 98, 167 93 L163 73 L160 74 L163 87 L160 88 L157 74 L154 75 L157 88 L154 89 L151 75 Z" />
+    <!-- Couteau à droite -->
+    <rect x="229" y="96" width="8" height="58" rx="4" transform="rotate(16 229 96)" />
+    <path d="M244 74 C250 76, 251 89, 245 103 L236 100 L242 75 Z" />
+  </g>
+
+  <!-- 5. BURGER GOURMAND AU CENTRE -->
+  <g>
+    <!-- Pain du bas -->
+    <path d="M161 138 H239 C239 148, 231 153, 221 153 H179 C169 153, 161 148, 161 138 Z" fill="url(#bunBotGrad)" />
+
+    <!-- Steak grillé -->
+    <rect x="158" y="124" width="84" height="14" rx="7" fill="#5c2c16" />
+    <rect x="162" y="126" width="76" height="4" rx="2" fill="#783b1e" opacity="0.6" />
+
+    <!-- Tranche de cheddar fondant -->
+    <path d="M160 121 H240 L234 126 L216 136 L196 125 L164 125 Z" fill="#ffc107" />
+
+    <!-- Sauce tomate / ketchup -->
+    <path d="M161 118 H239 C239 120.5, 237 122, 234 122 H166 C163 122, 161 120.5, 161 118 Z" fill="#e53935" />
+
+    <!-- Laitue ondulée -->
+    <path d="M156 113 C161 109, 166 116, 171 113 C176 110, 181 117, 187 113 C193 109, 198 117, 204 113 C210 109, 215 117, 221 113 C227 109, 232 116, 238 113 C242 111, 245 114, 244 117 C242 120, 236 119, 231 118 C225 117, 220 122, 214 119 C208 116, 202 121, 196 118 C190 115, 184 121, 178 118 C172 115, 166 120, 160 118 C156 117, 154 115, 156 113 Z" fill="#43a047" />
+
+    <!-- Pain du haut -->
+    <path d="M159 111 C159 86, 177 73, 200 73 C223 73, 241 86, 241 111 Z" fill="url(#bunTopGrad)" />
+
+    <!-- Graines de sésame -->
+    <g fill="#fff8e1">
+      <ellipse cx="184" cy="86" rx="3.2" ry="1.8" transform="rotate(-22 184 86)" />
+      <ellipse cx="200" cy="81" rx="3.2" ry="1.8" />
+      <ellipse cx="216" cy="86" rx="3.2" ry="1.8" transform="rotate(22 216 86)" />
+      <ellipse cx="175" cy="97" rx="3.2" ry="1.8" transform="rotate(-15 175 97)" />
+      <ellipse cx="192" cy="94" rx="3.2" ry="1.8" transform="rotate(-8 192 94)" />
+      <ellipse cx="209" cy="94" rx="3.2" ry="1.8" transform="rotate(8 209 94)" />
+      <ellipse cx="225" cy="97" rx="3.2" ry="1.8" transform="rotate(15 225 97)" />
+    </g>
+  </g>
+
+  <!-- 6. TEXTE "MiamMap" EN DESSOUS -->
+  <text x="200" y="406" text-anchor="middle" font-family="&#39;Nunito&#39;, &#39;Quicksand&#39;, &#39;Segoe UI&#39;, system-ui, -apple-system, sans-serif" font-size="64" font-weight="800" letter-spacing="-1.5">
+    <tspan fill="#1a202c">Miam</tspan><tspan fill="#ff5722">Map</tspan>
+  </text>
+</svg>
