@@ -4,6 +4,7 @@ import ControlsBar from './components/ControlsBar';
 import RestaurantList from './components/RestaurantList';
 import MapView from './components/MapView';
 import Spinner from './components/Spinner';
+import Footer from './components/Footer';
 import { searchLocation, fetchRealRestaurants } from './services/api';
 import 'leaflet/dist/leaflet.css';
 import './App.css';
@@ -198,6 +199,7 @@ export default function App() {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
